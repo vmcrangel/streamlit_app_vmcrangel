@@ -45,11 +45,17 @@ import matplotlib.pyplot as plt
 
 st.title("Evolução a cada 3 meses nas notícias verdadeiras")
 
+url_fake = "https://drive.google.com/uc?export=download&id=1Yjbj1aEZdsfAAMmTILPKUKhIJBvQ8f9f"
 url_true = "https://drive.google.com/uc?export=download&id=16GUK2Tozv5jWPMZ6tfjTRgPyYUJ2-NaB"
 
-# Carrega os arquivos CSV da web
+df_fake = pd.read_csv(url_fake)
 df_true = pd.read_csv(url_true)
 
+df_fake["label"] = "Fake"
+df_true["label"] = "Real"
+
+# Junta os dois em um único DataFrame
+df = pd.concat([df_fake, df_true], ignore_index=True)
 # Converte a coluna de data
 df["date"] = pd.to_datetime(df["date"], errors="coerce")
 
