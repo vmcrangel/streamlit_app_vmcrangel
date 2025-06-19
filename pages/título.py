@@ -52,9 +52,11 @@ import re
 
 st.title("Palavras-chave exclusivas nos títulos")
 
-# Carregar dados
-df_fake = pd.read_csv("Fake.csv")
-df_true = pd.read_csv("True.csv")
+url_fake = "https://drive.google.com/uc?export=download&id=1Yjbj1aEZdsfAAMmTILPKUKhIJBvQ8f9f"
+url_true = "https://drive.google.com/uc?export=download&id=16GUK2Tozv5jWPMZ6tfjTRgPyYUJ2-NaB"
+
+df_fake = pd.read_csv(url_fake)
+df_true = pd.read_csv(url_true)
 
 def limpar_texto(texto):
     texto = texto.lower()
