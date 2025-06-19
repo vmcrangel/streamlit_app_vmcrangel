@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 
-# Carregamento dos dados direto do Google Drive
+# Carrega os dados
 st.title("Evolução a cada 4 meses nas notícias falsas")
 url_fake = "https://drive.google.com/uc?export=download&id=1Yjbj1aEZdsfAAMmTILPKUKhIJBvQ8f9f"
 url_true = "https://drive.google.com/uc?export=download&id=16GUK2Tozv5jWPMZ6tfjTRgPyYUJ2-NaB"
@@ -11,94 +10,39 @@ url_true = "https://drive.google.com/uc?export=download&id=16GUK2Tozv5jWPMZ6tfjT
 df_fake = pd.read_csv(url_fake)
 df_true = pd.read_csv(url_true)
 
-df_fake["label"] = "Fake"
-df_true["label"] = "Real"
+# --- GRÁFICO DE FAKE ---
+df_fake["date"] = pd.to_datetime(df_fake["date"], errors="coerce")
+fake_contagem = df_fake["date"].value_counts().sort_index()
 
-df = pd.concat([df_fake, df_true], ignore_index=True)
+fig1, ax1 = plt.subplots(figsize=(10, 5), facecolor="#1E1E1E")
+ax1.set_facecolor("#1E1E1E")
+ax1.plot(fake_contagem.index, fake_contagem.values, color="#8A2BE2")
+ax1.set_title("Notícias falsas por data", color="white")
+ax1.tick_params(axis='x', rotation=45)
+ax1.tick_params(axis='both', colors='white')
+ax1.set_xlabel("Data", color="white")
+ax1.set_ylabel("Quantidade", color="white")
+st.pyplot(fig1)
 
-# Corrige a coluna de data (alguns datasets usam "date", outros "Date")
-if "date" in df.columns:
-    df["date"] = pd.to_datetime(df["date"], errors="coerce")
-elif "Date" in df.columns:
-    df["date"] = pd.to_datetime(df["Date"], errors="coerce")
-else:
-    st.error("⚠️ Nenhuma coluna de data encontrada no dataset.")
-# Converte a coluna de data para o formato datetime
-df["date"] = pd.to_datetime(df["date"], errors="coerce")
-
-# Agrupa por data
-contagem = df["date"].value_counts().sort_index()
-
-# Cria gráfico
-fig, ax = plt.subplots(figsize=(10, 5), facecolor="#1E1E1E")
-ax.set_facecolor("#1E1E1E")
-
-ax.plot(contagem.index, contagem.values, color="#8A2BE2")
-ax.set_title("Notícias falsas por data", color="white")
-ax.tick_params(axis='x', rotation=45)
-ax.tick_params(axis='both', colors='white')
-ax.set_xlabel("Data", color="white")
-ax.set_ylabel("Quantidade", color="white")
-
-st.pyplot(fig)
-
-with st.expander("Comentários"):
+with st.expander("Comentários - Notícias Falsas"):
     st.write("""
-    Este gráfico apresenta a evolução diária da quantidade de notícias falsas publicadas ao longo do tempo na base de dados.  
-
-    É possível observar picos em determinados dias que podem indicar campanhas de desinformação ou surtos de divulgação de fake news.  
-
-    Essa visualização é fundamental para entender como a desinformação se propaga ao longo do tempo e pode ajudar a direcionar estratégias de combate e conscientização.
+    Este gráfico apresenta a evolução diária da quantidade de notícias falsas publicadas ao longo do tempo.
     """)
 
-
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-
+# --- GRÁFICO DE VERDADEIRAS ---
 st.title("Evolução a cada 3 meses nas notícias verdadeiras")
+df_true["date"] = pd.to_datetime(df_true["date"], errors="coerce")
+true_contagem = df_true["date"].value_counts().sort_index()
 
-url_fake = "https://drive.google.com/uc?export=download&id=1Yjbj1aEZdsfAAMmTILPKUKhIJBvQ8f9f"
-url_true = "https://drive.google.com/uc?export=download&id=16GUK2Tozv5jWPMZ6tfjTRgPyYUJ2-NaB"
-
-df_fake = pd.read_csv(url_fake)
-df_true = pd.read_csv(url_true)
-
-df_fake["label"] = "Fake"
-df_true["label"] = "Real"
-
-# Junta os dois em um único DataFrame
-df = pd.concat([df_fake, df_true], ignore_index=True)
-# Converte a coluna de data
-df["date"] = pd.to_datetime(df["date"], errors="coerce")
-
-# Agrupa por data
-contagem = df["date"].value_counts().sort_index()
-
-# Cria gráfico
-fig, ax = plt.subplots(figsize=(10, 5), facecolor="#1E1E1E")
-ax.set_facecolor("#1E1E1E")
-
-ax.plot(contagem.index, contagem.values, color="#4169E1")
-ax.set_title("Notícias verdadeiras por data", color="white")
-ax.tick_params(axis='x', rotation=45)
-ax.tick_params(axis='both', colors='white')
-ax.set_xlabel("Data", color="white")
-ax.set_ylabel("Quantidade", color="white")
-
-st.pyplot(fig)
-
-with st.expander("Comentário"):
-    st.write("""
-    Este gráfico mostra a evolução diária da quantidade de notícias verdadeiras publicadas ao longo do tempo na base de dados.  
-
-    A análise temporal permite identificar tendências, picos e períodos de maior ou menor atividade na publicação de notícias confiáveis.  
-
-    Pode-se observar que a frequência varia, possivelmente refletindo eventos relevantes ou mudanças no interesse da mídia e do público.  
-
-    """)
-
-st.markdown("---")
+fig2, ax2 = plt.subplots(figsize=(10, 5), facecolor="#1E1E1E")
+ax2.set_facecolor("#1E1E1E")
+ax2.plot(true_contagem.index, true_contagem.values, color="#4169E1")
+ax2.set_title("Notícias verdadeiras por data", color="white")
+ax2.tick_params(axis='x', rotation=45)
+ax2.tick_params(axis='both', colors='white')
+ax2.set_xlabel("Data", color="white")
+ax2.set_ylabel("Quantidade", color="white")
+st.pyplot(fig2)
 
 import streamlit as st
 import pandas as pd
