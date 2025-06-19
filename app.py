@@ -4,6 +4,7 @@ import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 @st.cache_data
 def load_data():
     url_fake = "https://drive.google.com/uc?export=download&id=1Yjbj1aEZdsfAAMmTILPKUKhIJBvQ8f9f"
@@ -14,7 +15,6 @@ def load_data():
     true["label"] = "Real"
     df = pd.concat([fake, true], ignore_index=True)
     return df
-
 df = load_data()
 
 st.title("Trabalho final") 
