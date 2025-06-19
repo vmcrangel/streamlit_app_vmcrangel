@@ -11,8 +11,8 @@ url_true = "https://drive.google.com/uc?export=download&id=16GUK2Tozv5jWPMZ6tfjT
 df_fake = pd.read_csv(url_fake)
 df_true = pd.read_csv(url_true)
 
-qtd_falsas = len(fake_df)
-qtd_verdadeiras = len(true_df)
+qtd_falsas = len(df_fake)
+qtd_verdadeiras = len(df_true)
 
 labels = ["Verdadeiras", "Falsas"]
 valores = [qtd_verdadeiras, qtd_falsas]
