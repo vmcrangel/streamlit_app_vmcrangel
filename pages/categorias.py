@@ -4,9 +4,12 @@ import matplotlib.pyplot as plt
 
 st.title("Categorias mais frequentes")
 
-# Carregando os dados
-df_fake = pd.read_csv("Fake.csv")
-df_true = pd.read_csv("True.csv")
+url_fake = "https://drive.google.com/uc?export=download&id=1Yjbj1aEZdsfAAMmTILPKUKhIJBvQ8f9f"
+url_true = "https://drive.google.com/uc?export=download&id=16GUK2Tozv5jWPMZ6tfjTRgPyYUJ2-NaB"
+
+# Carrega os arquivos CSV da web
+df_fake = pd.read_csv(url_fake)
+df_true = pd.read_csv(url_true)
 
 # Adiciona uma coluna para indicar o tipo
 df_fake["label"] = "Fake"

@@ -4,8 +4,11 @@ import matplotlib.pyplot as plt
 
 st.title("Evolução a cada 4 meses nas notícias falsas")
 
-# Carrega os dados
-df = pd.read_csv("Fake.csv")
+url_fake = "https://drive.google.com/uc?export=download&id=1Yjbj1aEZdsfAAMmTILPKUKhIJBvQ8f9f"
+
+
+# Carrega os arquivos CSV da web
+df_fake = pd.read_csv(url_fake)
 
 # Converte a coluna de data para o formato datetime
 df["date"] = pd.to_datetime(df["date"], errors="coerce")
@@ -42,8 +45,10 @@ import matplotlib.pyplot as plt
 
 st.title("Evolução a cada 3 meses nas notícias verdadeiras")
 
-# Carrega os dados
-df = pd.read_csv("True.csv")
+url_true = "https://drive.google.com/uc?export=download&id=16GUK2Tozv5jWPMZ6tfjTRgPyYUJ2-NaB"
+
+# Carrega os arquivos CSV da web
+df_true = pd.read_csv(url_true)
 
 # Converte a coluna de data
 df["date"] = pd.to_datetime(df["date"], errors="coerce")
