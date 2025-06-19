@@ -68,8 +68,10 @@ import matplotlib.pyplot as plt
 st.title("Categorias com mais notícias falsas e verdadeiras")
 
 # Carregando os dados
-df_fake = pd.read_csv("Fake.csv")
-df_true = pd.read_csv("True.csv")
+url_fake = "https://drive.google.com/uc?export=download&id=1Yjbj1aEZdsfAAMmTILPKUKhIJBvQ8f9f"
+df_fake = pd.read_csv(url_fake)
+url_true = "https://drive.google.com/uc?export=download&id=16GUK2Tozv5jWPMZ6tfjTRgPyYUJ2-NaB"
+df_true = pd.read_csv(url_true)
 
 # Contagem dos subjects para fake e true
 cont_fake = df_fake['subject'].value_counts()
