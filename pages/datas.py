@@ -1,15 +1,27 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
-st.title("Evolução a cada 4 meses nas notícias falsas")
-
+# Carregamento dos dados direto do Google Drive
 url_fake = "https://drive.google.com/uc?export=download&id=1Yjbj1aEZdsfAAMmTILPKUKhIJBvQ8f9f"
+url_true = "https://drive.google.com/uc?export=download&id=16GUK2Tozv5jWPMZ6tfjTRgPyYUJ2-NaB"
 
-
-# Carrega os arquivos CSV da web
 df_fake = pd.read_csv(url_fake)
+df_true = pd.read_csv(url_true)
 
+df_fake["label"] = "Fake"
+df_true["label"] = "Real"
+
+df = pd.concat([df_fake, df_true], ignore_index=True)
+
+# Corrige a coluna de data (alguns datasets usam "date", outros "Date")
+if "date" in df.columns:
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+elif "Date" in df.columns:
+    df["date"] = pd.to_datetime(df["Date"], errors="coerce")
+else:
+    st.error("⚠️ Nenhuma coluna de data encontrada no dataset.")
 # Converte a coluna de data para o formato datetime
 df["date"] = pd.to_datetime(df["date"], errors="coerce")
 
