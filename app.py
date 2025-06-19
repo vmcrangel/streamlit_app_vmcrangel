@@ -71,7 +71,7 @@ st.markdown("""
     margin-bottom: 10px;
     background-color: #2c2c2c;">
   <h4>📊 Análise Visual com Gráficos</h4>
-  <p>Gráficos interativos mostram a distribuição das notícias por categorias, datas e regiões, facilitando a compreensão dos dados.</p>
+  <p>Gráficos mostram a distribuição das notícias por categorias, datas e regiões, facilitando a compreensão dos dados.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -101,18 +101,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Atualização e Exportação dos Resultados
-st.markdown("""
-<div style="
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 10px;
-    background-color: #2c2c2c;">
-  <h4>💾 Exportação dos Resultados</h4>
-  <p>Opção para baixar os dados analisados com previsões e classificações para uso externo e documentação.</p>
-</div>
-""", unsafe_allow_html=True)
 
 st.write("#### clique no menu lateral esquerdo para saber mais das nossas análises")
 
